@@ -17,3 +17,5 @@ Thumbs.db
 npm-debug.log*
 .vercel
 .netlify
+tsconfig.tsbuildinfo
+next-env.d.ts
