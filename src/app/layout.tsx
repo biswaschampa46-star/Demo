@@ -9,8 +9,8 @@ import SearchOverlay from "@/components/SearchOverlay";
 
 export const metadata: Metadata = {
   title: {
-    default: "EVERE — Everyday objects, elevated.",
-    template: "%s — EVERE",
+    default: "Mkr Casual — Everyday objects, elevated.",
+    template: "%s — Mkr Casual",
   },
   description:
     "A small, considered catalogue of everyday objects. Premium essentials, delivered across Bangladesh with advance payment via bKash, Nagad or Rocket.",

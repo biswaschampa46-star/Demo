@@ -12,7 +12,7 @@ export default function AboutPage() {
       {/* statement */}
       <header className="max-w-5xl">
         <Reveal>
-          <p className="label">About EVERE</p>
+          <p className="label">About Mkr Casual</p>
         </Reveal>
         <Reveal delay={90}>
           <h1 className="display-2 mt-8 text-foam">
@@ -40,7 +40,7 @@ export default function AboutPage() {
         <Reveal delay={140} className="md:col-span-4 md:col-start-9 md:pt-10">
           <div className="hairline mb-8 w-24" aria-hidden="true" />
           <p className="body-lead">
-            EVERE is a small, considered catalogue of everyday objects. We
+            Mkr Casual is a small, considered catalogue of everyday objects. We
             believe a home is built from a few things chosen carefully — not
             many things chosen quickly.
           </p>

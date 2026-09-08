@@ -60,7 +60,7 @@ export default function TrackPage() {
                   id="track-number"
                   required
                   className="field"
-                  placeholder="EV-123456"
+                  placeholder="MK-123456"
                   value={number}
                   onChange={(e) => setNumber(e.target.value)}
                 />

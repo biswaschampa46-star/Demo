@@ -80,7 +80,7 @@ export async function POST(request: Request) {
     const shippingFee = subtotal >= FREE_SHIPPING_OVER ? 0 : SHIPPING_FEE;
     const total = subtotal + shippingFee;
 
-    const orderNumber = `EV-${String(randomInt(100000, 999999))}`;
+    const orderNumber = `MK-${String(randomInt(100000, 999999))}`;
 
     const [created] = await db
       .insert(orders)

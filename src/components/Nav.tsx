@@ -64,9 +64,9 @@ export default function Nav() {
           <Link
             href="/"
             className="font-display text-lg font-extrabold tracking-[0.32em] text-foam"
-            aria-label="EVERE — home"
+            aria-label="Mkr Casual — home"
           >
-            EVERE
+            Mkr Casual
           </Link>
 
           {/* desktop links */}
@@ -135,7 +135,7 @@ export default function Nav() {
           }`}
         >
           <div className="flex h-[4.75rem] items-center justify-between px-6">
-            <span className="font-display text-lg font-extrabold tracking-[0.32em] text-foam">EVERE</span>
+            <span className="font-display text-lg font-extrabold tracking-[0.32em] text-foam">Mkr Casual</span>
             <button
               type="button"
               onClick={() => setMenuOpen(false)}

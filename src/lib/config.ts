@@ -5,7 +5,7 @@
  */
 
 export const STORE = {
-  name: "EVERE",
+  name: "Mkr Casual",
   tagline: "Everyday objects, elevated.",
   city: "Dhaka, Bangladesh",
 };

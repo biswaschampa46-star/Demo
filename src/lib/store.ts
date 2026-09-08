@@ -50,7 +50,7 @@ export const useCart = create<CartState>()(
         })),
       clear: () => set({ items: [] }),
     }),
-    { name: "evere-cart" },
+    { name: "mkr-casual-cart" },
   ),
 );
 
