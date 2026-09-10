@@ -546,6 +546,40 @@ details summary::-webkit-details-marker {
 }
 .pulse-soft { animation: pulse-soft 5s ease-in-out infinite; }
 
+/* ————————————————— typewriter description ————————————————— */
+
+.type-caret {
+  display: inline-block;
+  width: 1px;
+  margin-left: 1px;
+  height: 1em;
+  background: currentColor;
+  vertical-align: text-bottom;
+  animation: caret-blink 0.9s steps(2) infinite;
+}
+@keyframes caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* ————————————————— reviews ————————————————— */
+
+.review-modal-panel {
+  animation: modal-in 0.45s var(--ease-silk) both;
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); filter: blur(6px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.review-card {
+  animation: review-in 0.7s var(--ease-silk) both;
+}
+@keyframes review-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ————————————————— reduced motion ————————————————— */
 
 @media (prefers-reduced-motion: reduce) {

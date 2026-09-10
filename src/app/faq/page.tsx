@@ -12,7 +12,7 @@ const FAQS = [
   },
   {
     q: "Do you offer cash on delivery?",
-    a: "No. Mkr Casual is advance-payment only. This keeps dispatch fast and the courier process simple for everyone.",
+    a: "No. MKR is advance-payment only. This keeps dispatch fast and the courier process simple for everyone.",
   },
   {
     q: "When is my payment marked as verified?",

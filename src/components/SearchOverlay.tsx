@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -117,7 +117,7 @@ export default function SearchOverlay() {
           <div className="mt-8 min-h-[3rem]">
             {q.trim() && !loading && results.length === 0 && (
               <p className="py-4 text-sm text-mist">
-                Nothing found for “{q}”. Try another word.
+                Nothing found for â€œ{q}â€. Try another word.
               </p>
             )}
             <ul className="divide-y divide-line-soft">
@@ -135,7 +135,6 @@ export default function SearchOverlay() {
                       <p className="font-display truncate text-[0.95rem] font-semibold uppercase tracking-[0.06em] text-foam group-hover:text-ice">
                         {p.name}
                       </p>
-                      <p className="label mt-1.5 !text-mist/60">{p.category}</p>
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="text-sm text-ice">{bdt(p.price)}</span>

@@ -6,11 +6,13 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import SearchOverlay from "@/components/SearchOverlay";
+import AiAssistant from "@/components/AiAssistant";
+import AiChatFab from "@/components/AiChatFab";
 
 export const metadata: Metadata = {
   title: {
-    default: "Mkr Casual — Everyday objects, elevated.",
-    template: "%s — Mkr Casual",
+    default: "MKR — Everyday objects, elevated.",
+    template: "%s — MKR",
   },
   description:
     "A small, considered catalogue of everyday objects. Premium essentials, delivered across Bangladesh with advance payment via bKash, Nagad or Rocket.",
@@ -40,6 +42,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </div>
         <CartDrawer />
         <SearchOverlay />
+        <AiAssistant />
+        <AiChatFab />
       </body>
     </html>
   );

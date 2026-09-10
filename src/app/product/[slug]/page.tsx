@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ChevronDown } from "lucide-react";
 import { getProductBySlug, getRelatedProducts } from "@/lib/products";
 import { bdt, discountPct } from "@/lib/format";
-import { categoryLabel } from "@/lib/config";
 import PurchasePanel from "@/components/PurchasePanel";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
+import TypewriterDescription from "@/components/TypewriterDescription";
+import RatingSummary from "@/components/RatingSummary";
+import ReviewSection from "@/components/ReviewSection";
 
 export const dynamic = "force-dynamic";
 
@@ -73,7 +75,6 @@ export default async function ProductPage({
         {/* details */}
         <div className="lg:col-span-5">
           <Reveal delay={80}>
-            <p className="label label--bright">{categoryLabel(product.category)}</p>
             <h1 className="display-3 mt-5 text-foam">{product.name}</h1>
 
             <div className="mt-6 flex flex-wrap items-baseline gap-x-5 gap-y-2">
@@ -86,7 +87,9 @@ export default async function ProductPage({
               ) : null}
             </div>
 
-            <p className="body-lead mt-8 max-w-md !text-[0.98rem]">{product.description}</p>
+            <RatingSummary productId={product.id} variant="inline" className="mt-5" />
+
+            <TypewriterDescription text={product.description} className="mt-8 max-w-md !text-[0.98rem]" />
 
             <PurchasePanel
               product={{
@@ -126,6 +129,9 @@ export default async function ProductPage({
           </Reveal>
         </div>
       </div>
+
+      {/* reviews */}
+      <ReviewSection productId={product.id} productName={product.name} />
 
       {/* related */}
       {related.length > 0 && (

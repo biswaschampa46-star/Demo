@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -7,7 +7,7 @@ import { orders, ORDER_STAGES } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { Check, ArrowRight, Smartphone, Package } from "lucide-react";
 import { bdt, stageLabel, methodLabel, formatDate } from "@/lib/format";
-import { paymentNumber } from "@/lib/config";
+import { getPaymentNumber } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
 
@@ -37,7 +37,7 @@ export default async function OrderPage({
 
   const cancelled = order.status === "cancelled";
   const currentIdx = cancelled ? -1 : ORDER_STAGES.indexOf(order.status as (typeof ORDER_STAGES)[number]);
-  const payTo = paymentNumber(order.paymentMethod);
+  const payTo = await getPaymentNumber(order.paymentMethod);
 
   return (
     <div className="mx-auto max-w-[1100px] px-6 pb-28 pt-36 md:px-10 md:pt-44">
@@ -59,7 +59,7 @@ export default async function OrderPage({
         </div>
         {justPlaced && (
           <p className="mt-6 max-w-xl text-sm leading-relaxed text-mist">
-            Keep your order number — you can return to this page anytime via{" "}
+            Keep your order number â€” you can return to this page anytime via{" "}
             <Link href="/track" className="link-line text-soft hover:text-ice">Track Order</Link>.
           </p>
         )}
@@ -113,7 +113,7 @@ export default async function OrderPage({
                         </p>
                         {current && stage === "pending_payment" && (
                           <p className="mt-1.5 text-xs leading-relaxed text-mist/70">
-                            Waiting for your payment to be verified.
+                            Waiting for your delivery-charge payment to be verified. Products are paid in cash on delivery.
                           </p>
                         )}
                       </div>
@@ -134,11 +134,11 @@ export default async function OrderPage({
               <p className="mt-5 text-sm leading-relaxed text-mist">
                 Method: <span className="font-semibold text-foam">{methodLabel(order.paymentMethod)}</span>
                 <br />
-                Amount: <span className="font-semibold text-ice">{bdt(order.total)}</span>
+                Amount (delivery charge only): <span className="font-semibold text-ice">{bdt(order.shippingFee)}</span>
               </p>
               {payTo ? (
                 <p className="mt-4 text-sm leading-relaxed text-mist">
-                  Send the amount via <span className="text-foam">Send Money</span> to{" "}
+                  Send the delivery charge via <span className="text-foam">Send Money</span> to{" "}
                   <span className="font-display font-semibold tracking-[0.08em] text-ice">{payTo}</span>,
                   then keep the Transaction ID. We verify and confirm your order.
                 </p>
@@ -151,7 +151,7 @@ export default async function OrderPage({
                 </p>
               )}
               <p className="mt-5 text-xs leading-relaxed text-mist/60">
-                We never mark payments as verified automatically — every order is
+                We never mark payments as verified automatically â€” every order is
                 checked by the store team.
               </p>
             </section>
@@ -195,7 +195,7 @@ export default async function OrderPage({
                       {item.name}
                     </Link>
                     <p className="mt-1.5 text-xs text-mist/70">
-                      {item.variant} · ×{item.qty}
+                      {item.variant} Â· Ã—{item.qty}
                     </p>
                   </div>
                   <p className="text-sm text-ice">{bdt(item.price * item.qty)}</p>
@@ -217,7 +217,7 @@ export default async function OrderPage({
               </div>
               <div className="flex justify-between pt-1 text-xs">
                 <dt className="text-mist/70">Payment method</dt>
-                <dd className="text-mist">{methodLabel(order.paymentMethod)} · advance</dd>
+                <dd className="text-mist">{methodLabel(order.paymentMethod)} Â· advance</dd>
               </div>
             </dl>
           </section>

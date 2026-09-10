@@ -28,7 +28,7 @@ export default function WhyUs() {
     <section className="relative py-24 md:py-36" aria-label="Why choose us">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <Reveal>
-          <p className="label">Why Mkr Casual</p>
+          <p className="label">Why MKR</p>
         </Reveal>
 
         <div className="mt-14 grid gap-12 border-t border-line-soft pt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">

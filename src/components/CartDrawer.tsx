@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect } from "react";
 import Link from "next/link";
@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { X, Minus, Plus, ArrowRight, ShoppingBag } from "lucide-react";
 import { useUI, useCart, useCartTotals } from "@/lib/store";
 import { bdt } from "@/lib/format";
-import { FREE_SHIPPING_OVER } from "@/lib/config";
 
 export default function CartDrawer() {
   const { cartOpen, setCartOpen } = useUI();
@@ -144,10 +143,9 @@ export default function CartDrawer() {
                 <p className="font-display text-xl font-bold text-ice">{bdt(subtotal)}</p>
               </div>
               <p className="mt-2 text-xs leading-relaxed text-mist/70">
-                {subtotal >= FREE_SHIPPING_OVER
-                  ? "Your order qualifies for free delivery."
-                  : "Delivery calculated at checkout."}{" "}
-                Paid in advance via bKash, Nagad or Rocket.
+                Products are paid in cash on delivery. The delivery charge —
+                ৳70 inside Chittagong, ৳130 outside — is prepaid via bKash,
+                Nagad or Rocket.
               </p>
               <div className="mt-6 grid grid-cols-2 gap-3">
                 <button type="button" className="btn btn-line !px-4" onClick={() => go("/cart")}>

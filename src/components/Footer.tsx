@@ -1,6 +1,7 @@
-import Link from "next/link";
+﻿import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { STORE, CATEGORIES } from "@/lib/config";
+import { STORE } from "@/lib/config";
 import Reveal from "./Reveal";
 
 const SOCIALS = [
@@ -20,7 +21,7 @@ export default function Footer() {
               {STORE.name}
             </Link>
             <p className="body-lead mt-6 max-w-sm">
-              {STORE.tagline} A small, considered catalogue — designed for everyday
+              {STORE.tagline} A small, considered catalogue â€” designed for everyday
               life, delivered across Bangladesh.
             </p>
             <div className="mt-8 flex gap-3">
@@ -43,20 +44,12 @@ export default function Footer() {
             <ul className="space-y-3.5 text-sm">
               <li><Link className="link-line text-mist hover:text-foam" href="/shop">All Products</Link></li>
               <li><Link className="link-line text-mist hover:text-foam" href="/shop?view=new">New Arrivals</Link></li>
-              {CATEGORIES.map((c) => (
-                <li key={c.slug}>
-                  <Link className="link-line text-mist hover:text-foam" href={`/shop?category=${c.slug}`}>
-                    {c.label}
-                  </Link>
-                </li>
-              ))}
             </ul>
           </Reveal>
 
           <Reveal delay={160} className="md:col-span-2">
             <p className="label label--bright mb-6">Company</p>
             <ul className="space-y-3.5 text-sm">
-              <li><Link className="link-line text-mist hover:text-foam" href="/collections">Collections</Link></li>
               <li><Link className="link-line text-mist hover:text-foam" href="/about">About</Link></li>
               <li><Link className="link-line text-mist hover:text-foam" href="/contact">Contact</Link></li>
               <li><Link className="link-line text-mist hover:text-foam" href="/faq">FAQ</Link></li>
@@ -66,11 +59,17 @@ export default function Footer() {
 
           <Reveal delay={230} className="md:col-span-2">
             <p className="label label--bright mb-6">Payment</p>
-            <ul className="space-y-3.5 text-sm text-mist">
-              {["bKash", "Nagad", "Rocket"].map((p) => (
-                <li key={p} className="flex items-center gap-2.5">
-                  <span className="inline-block h-1 w-1 rounded-full bg-accent/70" aria-hidden="true" />
-                  {p}
+            <ul className="flex flex-wrap gap-2.5">
+              {[
+                { n: "bKash", logo: "/images/payments/bkash.png" },
+                { n: "Nagad", logo: "/images/payments/nagad.png" },
+                { n: "Rocket", logo: "/images/payments/rocket.png" },
+              ].map((p) => (
+                <li key={p.n} className="flex items-center gap-2.5 rounded-lg border border-line-soft bg-white/[0.04] px-3 py-2">
+                  <span className="grid h-6 w-11 place-items-center rounded-md bg-white px-1.5">
+                    <Image src={p.logo} alt={p.n} width={32} height={14} className="h-3.5 w-auto object-contain" />
+                  </span>
+                  <span className="text-xs text-mist">{p.n}</span>
                 </li>
               ))}
             </ul>
@@ -85,7 +84,7 @@ export default function Footer() {
         {/* bottom row */}
         <div className="mt-8 flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
           <p className="text-xs tracking-wide text-mist/60">
-            © {new Date().getFullYear()} {STORE.name} · {STORE.city}
+            Â© {new Date().getFullYear()} {STORE.name} Â· {STORE.city}
           </p>
           <p className="label !text-mist/50">Less clutter. More space.</p>
           <Link

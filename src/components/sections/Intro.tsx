@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import AiChatTrigger from "@/components/AiChatTrigger";
 
 export default function Intro() {
   return (
@@ -9,9 +10,10 @@ export default function Intro() {
         </Reveal>
 
         <Reveal delay={90}>
-          <h2 className="display-2 mt-8 max-w-5xl text-foam">
+          <h2 className="display-2 mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 max-w-5xl text-foam">
             <span className="lm lm-io"><span>Designed for</span></span>
             <span className="lm lm-io"><span className="text-stroke">the way you live.</span></span>
+            <AiChatTrigger />
           </h2>
         </Reveal>
 

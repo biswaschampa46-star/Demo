@@ -5,14 +5,10 @@
  */
 
 export const STORE = {
-  name: "Mkr Casual",
+  name: "MKR",
   tagline: "Everyday objects, elevated.",
   city: "Dhaka, Bangladesh",
 };
-
-/** Flat shipping fee in BDT. Free above FREE_SHIPPING_OVER. */
-export const SHIPPING_FEE = 80;
-export const FREE_SHIPPING_OVER = 5000;
 
 /**
  * Payment collection numbers — read from env. When unset, checkout still
@@ -30,15 +26,4 @@ export function paymentNumber(method: string): string | null {
     default:
       return null;
   }
-}
-
-export const CATEGORIES = [
-  { slug: "electronics", label: "Electronics" },
-  { slug: "fashion", label: "Fashion" },
-  { slug: "accessories", label: "Accessories" },
-  { slug: "home", label: "Home" },
-] as const;
-
-export function categoryLabel(slug: string): string {
-  return CATEGORIES.find((c) => c.slug === slug)?.label ?? slug;
 }

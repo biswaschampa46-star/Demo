@@ -1,7 +1,8 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import type { ProductCard as ProductCardType } from "@/lib/products";
 import { bdt, discountPct } from "@/lib/format";
+import ProductCardRating from "@/components/ProductCardRating";
 
 export default function ProductCard({
   product,
@@ -18,7 +19,7 @@ export default function ProductCard({
     <Link
       href={`/product/${product.slug}`}
       className="group block"
-      aria-label={`${product.name} — ${bdt(product.price)}`}
+      aria-label={`${product.name} â€” ${bdt(product.price)}`}
     >
       <div className="pcard-media media-frame relative aspect-[4/5]">
         <Image
@@ -45,9 +46,7 @@ export default function ProductCard({
           <h3 className="font-display text-[0.95rem] font-semibold uppercase tracking-[0.08em] text-foam">
             {product.name}
           </h3>
-          <p className="label mt-1.5 !tracking-[0.24em] !text-mist/70">
-            {product.category}
-          </p>
+          <ProductCardRating productId={product.id} className="mt-2.5" />
         </div>
         <div className="text-right">
           <p className="text-[0.95rem] font-medium text-ice">{bdt(product.price)}</p>

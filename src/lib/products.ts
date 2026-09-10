@@ -1,12 +1,11 @@
-import { db } from "@/db";
+﻿import { db } from "@/db";
 import { products, type Product } from "@/db/schema";
-import { desc, eq, ilike, or, sql } from "drizzle-orm";
+import { desc, eq, ilike, ne, or } from "drizzle-orm";
 
 export type ProductCard = {
   id: string;
   slug: string;
   name: string;
-  category: string;
   price: number;
   compareAtPrice: number | null;
   image: string;
@@ -18,7 +17,6 @@ const cardColumns = {
   id: products.id,
   slug: products.slug,
   name: products.name,
-  category: products.category,
   price: products.price,
   compareAtPrice: products.compareAtPrice,
   image: products.image,
@@ -48,7 +46,7 @@ export async function getRelatedProducts(product: Product, limit = 3): Promise<P
     return await db
       .select(cardColumns)
       .from(products)
-      .where(sql`${products.category} = ${product.category} and ${products.id} <> ${product.id}`)
+      .where(ne(products.id, product.id))
       .limit(limit);
   } catch {
     return [];
@@ -62,7 +60,7 @@ export async function searchProducts(q: string, limit = 6): Promise<ProductCard[
     return await db
       .select(cardColumns)
       .from(products)
-      .where(or(ilike(products.name, term), ilike(products.category, term), ilike(products.description, term)))
+      .where(or(ilike(products.name, term), ilike(products.description, term)))
       .limit(limit);
   } catch {
     return [];
@@ -90,18 +88,13 @@ export function sortProducts(list: ProductCard[], sort: SortKey): ProductCard[] 
 
 export function filterProducts(
   list: ProductCard[],
-  opts: { category?: string; view?: string; q?: string },
+  opts: { view?: string; q?: string },
 ): ProductCard[] {
   let out = list;
   if (opts.view === "new") out = out.filter((p) => p.isNew);
-  if (opts.category && opts.category !== "all") {
-    out = out.filter((p) => p.category === opts.category);
-  }
   if (opts.q) {
     const t = opts.q.toLowerCase();
-    out = out.filter(
-      (p) => p.name.toLowerCase().includes(t) || p.category.toLowerCase().includes(t),
-    );
+    out = out.filter((p) => p.name.toLowerCase().includes(t));
   }
   return out;
 }

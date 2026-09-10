@@ -7,7 +7,6 @@ import { Search, ShoppingBag, Menu, X } from "lucide-react";
 import { useUI, useCartTotals } from "@/lib/store";
 
 const LINKS = [
-  { href: "/collections", label: "Collections" },
   { href: "/shop", label: "Shop" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
@@ -16,7 +15,6 @@ const LINKS = [
 const MENU_LINKS = [
   { href: "/shop", label: "Shop All" },
   { href: "/shop?view=new", label: "New Arrivals" },
-  { href: "/collections", label: "Collections" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
   { href: "/faq", label: "FAQ" },
@@ -64,9 +62,9 @@ export default function Nav() {
           <Link
             href="/"
             className="font-display text-lg font-extrabold tracking-[0.32em] text-foam"
-            aria-label="Mkr Casual — home"
+            aria-label="MKR â€” home"
           >
-            Mkr Casual
+            MKR
           </Link>
 
           {/* desktop links */}
@@ -120,7 +118,7 @@ export default function Nav() {
         </nav>
       </header>
 
-      {/* ——— mobile editorial overlay menu ——— */}
+      {/* â€”â€”â€” mobile editorial overlay menu â€”â€”â€” */}
       <div
         className={`fixed inset-0 z-[60] md:hidden ${menuOpen ? "menu-open" : "pointer-events-none"}`}
         aria-hidden={!menuOpen}
@@ -135,7 +133,7 @@ export default function Nav() {
           }`}
         >
           <div className="flex h-[4.75rem] items-center justify-between px-6">
-            <span className="font-display text-lg font-extrabold tracking-[0.32em] text-foam">Mkr Casual</span>
+            <span className="font-display text-lg font-extrabold tracking-[0.32em] text-foam">MKR</span>
             <button
               type="button"
               onClick={() => setMenuOpen(false)}
@@ -161,7 +159,7 @@ export default function Nav() {
 
           <div className="menu-item px-8 pb-10" style={{ "--d": "640ms" } as CSSProperties}>
             <div className="hairline-full mb-6" />
-            <p className="label !text-mist/60">bKash · Nagad · Rocket</p>
+            <p className="label !text-mist/60">bKash Â· Nagad Â· Rocket</p>
             <p className="mt-3 text-sm text-mist/70">Everyday objects, elevated.</p>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
@@ -14,7 +14,7 @@ export default function NewArrivals({ products }: { products: ProductCardType[] 
     <section className="relative py-24 md:py-36" aria-label="New arrivals">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
-          {/* lead product — tall, left */}
+          {/* lead product â€” tall, left */}
           <Reveal className="lg:col-span-7">
             <div className="mb-10 lg:mb-0">
               <p className="label">Just Landed</p>
@@ -29,12 +29,12 @@ export default function NewArrivals({ products }: { products: ProductCardType[] 
             </div>
           </Reveal>
 
-          {/* supporting stack — right */}
+          {/* supporting stack â€” right */}
           <div className="flex flex-col justify-end gap-10 lg:col-span-5 lg:pb-6">
             <Reveal delay={120}>
               <div className="hairline mb-10 hidden w-28 lg:block" aria-hidden="true" />
               <p className="body-lead max-w-sm">
-                The latest additions to the catalogue — small batches, quietly
+                The latest additions to the catalogue â€” small batches, quietly
                 released.
               </p>
             </Reveal>
@@ -52,7 +52,6 @@ export default function NewArrivals({ products }: { products: ProductCardType[] 
                     />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="label !text-mist/60">{p.category}</p>
                     <h3 className="font-display mt-2 text-base font-semibold uppercase tracking-[0.07em] text-foam transition-colors duration-300 group-hover:text-ice">
                       {p.name}
                     </h3>

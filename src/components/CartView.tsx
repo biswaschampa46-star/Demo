@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { Minus, Plus, X, ArrowRight, ShoppingBag } from "lucide-react";
 import { useCart, useCartTotals } from "@/lib/store";
 import { bdt } from "@/lib/format";
-import { FREE_SHIPPING_OVER, SHIPPING_FEE } from "@/lib/config";
 
 export default function CartView() {
   const setQty = useCart((s) => s.setQty);
@@ -14,7 +13,6 @@ export default function CartView() {
   const { items, subtotal } = useCartTotals();
   const router = useRouter();
 
-  const shipping = subtotal === 0 || subtotal >= FREE_SHIPPING_OVER ? 0 : SHIPPING_FEE;
 
   return (
     <div className="mx-auto max-w-[1400px] px-6 pb-28 pt-36 md:px-10 md:pt-44">
@@ -94,18 +92,18 @@ export default function CartView() {
                   <dd className="text-foam">{bdt(subtotal)}</dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-mist">Delivery</dt>
-                  <dd className="text-foam">{shipping === 0 ? "Free" : bdt(shipping)}</dd>
+                  <dt className="text-mist">Delivery charge (prepaid)</dt>
+                  <dd className="text-foam">{bdt(70)} Ctg / {bdt(130)} out</dd>
                 </div>
                 <div className="hairline-full" />
                 <div className="flex items-baseline justify-between">
                   <dt className="label">Total</dt>
-                  <dd className="font-display text-2xl font-bold text-ice">{bdt(subtotal + shipping)}</dd>
+                  <dd className="font-display text-2xl font-bold text-ice">{bdt(subtotal)}</dd>
                 </div>
               </dl>
               <p className="mt-5 text-xs leading-relaxed text-mist/70">
-                Paid in advance via bKash, Nagad or Rocket. Cash on delivery is
-                not available.
+                Products are paid in CASH ON DELIVERY. The delivery charge — ৳70 inside
+                Chittagong, ৳130 outside — is paid in advance via bKash, Nagad or Rocket.
               </p>
               <button type="button" className="btn btn-solid mt-7 w-full" onClick={() => router.push("/checkout")}>
                 Proceed to Checkout <ArrowRight className="btn-arrow h-3.5 w-3.5" />

@@ -1,4 +1,4 @@
-import {
+﻿import {
   pgTable,
   pgEnum,
   uuid,
@@ -26,7 +26,6 @@ export const products = pgTable(
     name: varchar("name", { length: 160 }).notNull(),
     description: text("description").notNull().default(""),
     material: text("material").notNull().default(""),
-    category: varchar("category", { length: 40 }).notNull(),
     price: integer("price").notNull(), // in BDT
     compareAtPrice: integer("compare_at_price"),
     image: varchar("image", { length: 300 }).notNull(),
@@ -38,10 +37,40 @@ export const products = pgTable(
       .notNull()
       .defaultNow(),
   },
-  (t) => [index("products_category_idx").on(t.category)],
 );
 
 export type Product = typeof products.$inferSelect;
+
+/* ------------------------------------------------------------------ */
+/*  Product reviews                                                    */
+/* ------------------------------------------------------------------ */
+
+export const productReviews = pgTable(
+  "product_reviews",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    productId: uuid("product_id")
+      .notNull()
+      .references(() => products.id, { onDelete: "cascade" }),
+    name: varchar("name", { length: 120 }).notNull(),
+    rating: integer("rating").notNull(), // 1–5
+    review: text("review").notNull(),
+    email: varchar("email", { length: 160 }),
+    phone: varchar("phone", { length: 24 }),
+    verifiedPurchase: boolean("verified_purchase").notNull().default(false),
+    approved: boolean("approved").notNull().default(true),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (t) => [index("product_reviews_product_idx").on(t.productId)],
+);
+
+export type ProductReview = typeof productReviews.$inferSelect;
+export type NewProductReview = typeof productReviews.$inferInsert;
 
 /* ------------------------------------------------------------------ */
 /*  Orders                                                             */
@@ -128,6 +157,18 @@ export const messages = pgTable("messages", {
   email: varchar("email", { length: 160 }).notNull(),
   message: text("message").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+});
+
+/* ------------------------------------------------------------------ */
+/*  Store settings (admin-editable key/value overrides)                */
+/* ------------------------------------------------------------------ */
+
+export const settings = pgTable("settings", {
+  key: varchar("key", { length: 60 }).primaryKey(),
+  value: text("value").notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
     .notNull()
     .defaultNow(),
 });

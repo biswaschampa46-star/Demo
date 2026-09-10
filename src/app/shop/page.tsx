@@ -1,10 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import ProductCard from "@/components/ProductCard";
 import ShopSort from "@/components/ShopSort";
 import { getAllProducts, sortProducts, filterProducts, type SortKey } from "@/lib/products";
-import { CATEGORIES } from "@/lib/config";
 
 export const dynamic = "force-dynamic";
 
@@ -18,24 +17,16 @@ export default async function ShopPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const sp = await searchParams;
-  const category = typeof sp.category === "string" ? sp.category : "all";
   const view = typeof sp.view === "string" ? sp.view : undefined;
   const q = typeof sp.q === "string" ? sp.q : undefined;
   const sort: SortKey = SORTS.includes(sp.sort as SortKey) ? (sp.sort as SortKey) : "featured";
 
   const all = await getAllProducts();
-  const filtered = sortProducts(filterProducts(all, { category, view, q }), sort);
+  const filtered = sortProducts(filterProducts(all, { view, q }), sort);
 
-  const title = q
-    ? `“${q}”`
-    : view === "new"
-      ? "New Arrivals"
-      : category !== "all"
-        ? (CATEGORIES.find((c) => c.slug === category)?.label ?? "Shop")
-        : "Shop All";
+  const title = q ? `“${q}”` : view === "new" ? "New Arrivals" : "Shop All";
 
   const params: Record<string, string> = {};
-  if (category !== "all") params.category = category;
   if (view) params.view = view;
   if (q) params.q = q;
   const filterHref = (patch: Record<string, string | null>) => {
@@ -49,13 +40,8 @@ export default async function ShopPage({
   };
 
   const chips = [
-    { label: "All", href: filterHref({ category: null, view: null }), active: category === "all" && !view },
-    ...CATEGORIES.map((c) => ({
-      label: c.label,
-      href: filterHref({ category: c.slug, view: null }),
-      active: category === c.slug && !view,
-    })),
-    { label: "New Arrivals", href: filterHref({ view: "new", category: null }), active: view === "new" },
+    { label: "All", href: filterHref({ view: null }), active: !view },
+    { label: "New Arrivals", href: filterHref({ view: "new" }), active: view === "new" },
   ];
 
   return (
@@ -71,7 +57,7 @@ export default async function ShopPage({
 
       {/* controls */}
       <div className="mb-14 flex flex-wrap items-center justify-between gap-x-8 gap-y-5 border-b border-line-soft pb-5">
-        <nav aria-label="Categories" className="flex flex-wrap gap-x-7 gap-y-2">
+        <nav aria-label="Filters" className="flex flex-wrap gap-x-7 gap-y-2">
           {chips.map((c) => (
             <Link key={c.label} href={c.href} className="chip" aria-pressed={c.active}>
               {c.label}

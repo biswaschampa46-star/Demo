@@ -58,18 +58,22 @@ type UIState = {
   cartOpen: boolean;
   menuOpen: boolean;
   searchOpen: boolean;
+  aiOpen: boolean;
   setCartOpen: (v: boolean) => void;
   setMenuOpen: (v: boolean) => void;
   setSearchOpen: (v: boolean) => void;
+  setAiOpen: (v: boolean) => void;
 };
 
 export const useUI = create<UIState>((set) => ({
   cartOpen: false,
   menuOpen: false,
   searchOpen: false,
+  aiOpen: false,
   setCartOpen: (v) => set({ cartOpen: v }),
   setMenuOpen: (v) => set({ menuOpen: v }),
   setSearchOpen: (v) => set({ searchOpen: v }),
+  setAiOpen: (v) => set({ aiOpen: v }),
 }));
 
 /** Avoids hydration mismatch for persisted-cart dependent UI. */

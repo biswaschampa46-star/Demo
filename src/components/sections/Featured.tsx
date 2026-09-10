@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMemo, useState, type CSSProperties } from "react";
 import Link from "next/link";
@@ -8,10 +8,6 @@ import type { ProductCard as ProductCardType } from "@/lib/products";
 
 const TABS = [
   { id: "all", label: "All" },
-  { id: "electronics", label: "Electronics" },
-  { id: "fashion", label: "Fashion" },
-  { id: "accessories", label: "Accessories" },
-  { id: "home", label: "Home" },
   { id: "new", label: "New Arrivals" },
 ] as const;
 
@@ -30,9 +26,7 @@ export default function Featured({ products }: { products: ProductCardType[] }) 
     let list =
       tab === "new"
         ? products.filter((p) => p.isNew)
-        : tab === "all"
-          ? products.filter((p) => p.isFeatured)
-          : products.filter((p) => p.category === tab);
+        : products.filter((p) => p.isFeatured);
     if (list.length === 0 && tab !== "all") list = products.slice(0, 4);
     if (tab === "all" && list.length < 4) {
       const extra = products.filter((p) => !list.includes(p));
@@ -63,10 +57,10 @@ export default function Featured({ products }: { products: ProductCardType[] }) 
           </Link>
         </div>
 
-        {/* editorial category navigation */}
+        {/* editorial filter navigation */}
         <div
           role="group"
-          aria-label="Filter by category"
+          aria-label="Filter products"
           className="mb-12 flex flex-wrap gap-x-8 gap-y-2 overflow-x-auto border-b border-line-soft pb-1 md:mb-16 md:gap-x-10"
         >
           {TABS.map((t) => (
